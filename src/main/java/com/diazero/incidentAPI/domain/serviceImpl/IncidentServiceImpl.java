@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 public class IncidentServiceImpl implements IncidentService {
-    private static final String NOT_FOUND = "Incident not found";
+    private static final String NOT_FOUND = "Incident not found, verify ID";
 
     @Autowired
     private IncidentRepository incidentRepository;
@@ -36,8 +36,8 @@ public class IncidentServiceImpl implements IncidentService {
 
         incident.setCreatedAt(OffsetDateTime.now());
         incident.setUpdatedAt(OffsetDateTime.now());
-
         incident = incidentRepository.save(incident);
+
         IncidentDTO incidentOutputDTO = entityToOutputIncident.toModel(incident);
         return incidentOutputDTO;
     }
@@ -50,8 +50,8 @@ public class IncidentServiceImpl implements IncidentService {
         BeanUtils.copyProperties(updatedIncident, currentIncident, "id", "createdAt");
         currentIncident.setUpdatedAt(OffsetDateTime.now());
         incidentRepository.save(currentIncident);
-        IncidentDTO incidentOutputDTO = entityToOutputIncident.toModel(currentIncident);
 
+        IncidentDTO incidentOutputDTO = entityToOutputIncident.toModel(currentIncident);
         return incidentOutputDTO;
     }
 
@@ -61,22 +61,28 @@ public class IncidentServiceImpl implements IncidentService {
     }
 
     @Override
-    public List<IncidentDTO> getAllIncident(IncidentDTO incidentDTO) {
-        return null;
+    public List<IncidentDTO> getAllIncidents() {
+        List<Incident> incidents = incidentRepository.findAll();
+        List<IncidentDTO> incidentOutput = entityToOutputIncident.toCollectionModel(incidents);
+        return incidentOutput;
     }
 
     @Override
-    public List<IncidentDTO> getIncidentById(Long id) {
-        return null;
+    public IncidentDTO getIncidentById(Long id) {
+        Incident incident = searchOrFail(id);
+        IncidentDTO incidentOutput = entityToOutputIncident.toModel(incident);
+        return incidentOutput;
     }
 
     @Override
-    public List<IncidentDTO> getLastTwentyIncidents(IncidentDTO incidentDTO) {
-        return null;
+    public List<IncidentDTO> getLastTwentyIncidents() {
+        List<Incident> incidents = incidentRepository.findTop20ByOrderByCreatedAtDesc();
+        List<IncidentDTO> incidentsOutput = entityToOutputIncident.toCollectionModel(incidents);
+        return incidentsOutput;
+
     }
 
     public Incident searchOrFail(Long id) {
-        return incidentRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(NOT_FOUND));
+        return incidentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(NOT_FOUND));
     }
 }
