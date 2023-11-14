@@ -61,4 +61,14 @@ public class IncidentController {
         List<IncidentDTO> incident = incidentService.getAllIncidents();
         return ResponseEntity.ok(incident);
     }
+
+    @ApiOperation(value = "incident by Id", nickname = "getIncidentById", notes = "get an incident by its id", response = IncidentDTO.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Incident exists"),
+            @ApiResponse(code = 400, message = "Incident not found")})
+    @RequestMapping( value="/getLastIncidents", consumes = { "application/json" }, produces = { "application/json" }, method = RequestMethod.GET)
+    public ResponseEntity<List<IncidentDTO>> getTwentyLastIncidents() {
+        List<IncidentDTO> incident = incidentService.getLastTwentyIncidents();
+        return ResponseEntity.ok(incident);
+    }
 }

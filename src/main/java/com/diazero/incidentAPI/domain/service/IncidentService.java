@@ -13,7 +13,7 @@ public interface IncidentService {
     List<IncidentDTO> getAllIncidents();
 
     IncidentDTO getIncidentById(Long id);
-    List<IncidentDTO> getLastTwentyIncidents(IncidentDTO incidentDTO);
+    List<IncidentDTO> getLastTwentyIncidents();
 
 
 }
