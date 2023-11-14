@@ -61,13 +61,19 @@ public class IncidentServiceImpl implements IncidentService {
     }
 
     @Override
-    public List<IncidentDTO> getAllIncident(IncidentDTO incidentDTO) {
-        return null;
+    public List<IncidentDTO> getAllIncidents() {
+        List<Incident> incidents = incidentRepository.findAll();
+
+
+        List<IncidentDTO> incidentOutput = entityToOutputIncident.toCollectionModel(incidents);
+        return incidentOutput;
     }
 
     @Override
-    public List<IncidentDTO> getIncidentById(Long id) {
-        return null;
+    public IncidentDTO getIncidentById(Long id) {
+        Incident incident = searchOrFail(id);
+        IncidentDTO incidentOutput = entityToOutputIncident.toModel(incident);
+        return incidentOutput;
     }
 
     @Override

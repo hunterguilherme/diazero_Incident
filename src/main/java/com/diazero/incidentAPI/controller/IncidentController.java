@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 //@Authorize
 @RestController
@@ -41,14 +42,23 @@ public class IncidentController {
     }
 
 
-//    @ApiOperation(value = "incident Creation", nickname = "createIncident", notes = "Saves an incident", response = IncidentDTO.class)
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Incident Creation Success"),
-//            @ApiResponse(code = 400, message = "Incident not found")})
-//    @RequestMapping(consumes = { "application/json" }, produces = { "application/json" }, method = RequestMethod.POST)
-//    public ResponseEntity<IncidentDTO> getIncidentById(@PathVariable @Valid Long id) {
-//        IncidentDTO incident = incidentService.getIncidentById(id);
-//        return ResponseEntity.ok(incident);
-//    }
+    @ApiOperation(value = "incident by Id", nickname = "getIncidentById", notes = "get an incident by its id", response = IncidentDTO.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Incident exists"),
+            @ApiResponse(code = 400, message = "Incident not found")})
+    @RequestMapping(value = "{id}", consumes = { "application/json" }, produces = { "application/json" }, method = RequestMethod.GET)
+    public ResponseEntity<IncidentDTO> getIncidentById(@PathVariable Long id) {
+        IncidentDTO incident = incidentService.getIncidentById(id);
+        return ResponseEntity.ok(incident);
+    }
 
+    @ApiOperation(value = "incident by Id", nickname = "getIncidentById", notes = "get an incident by its id", response = IncidentDTO.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Incident exists"),
+            @ApiResponse(code = 400, message = "Incident not found")})
+    @RequestMapping( consumes = { "application/json" }, produces = { "application/json" }, method = RequestMethod.GET)
+    public ResponseEntity<List<IncidentDTO>> getAllIncidents() {
+        List<IncidentDTO> incident = incidentService.getAllIncidents();
+        return ResponseEntity.ok(incident);
+    }
 }
