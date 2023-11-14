@@ -41,7 +41,7 @@ public class IncidentController {
         return ResponseEntity.ok(incident);
     }
 
-    @ApiOperation(value = "Remove Documento", nickname = "removeDocumento", notes = "Remove apenas documento")
+    @ApiOperation(value = "Remove Incident", nickname = "removeIncident", notes = "remove incidents")
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "incident with id = x successfully deleted."),
             @ApiResponse(code = 404, message = "Incident not found, verify ID")})
@@ -62,7 +62,7 @@ public class IncidentController {
         return ResponseEntity.ok(incident);
     }
 
-    @ApiOperation(value = "incident by Id", nickname = "getIncidentById", notes = "get an incident by its id", response = IncidentDTO.class)
+    @ApiOperation(value = "All incidents", nickname = "getIncidentById", notes = "get an incident by its id", response = IncidentDTO.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Incident exists"),
             @ApiResponse(code = 400, message = "Incident not found")})
@@ -72,7 +72,7 @@ public class IncidentController {
         return ResponseEntity.ok(incident);
     }
 
-    @ApiOperation(value = "incident by Id", nickname = "getIncidentById", notes = "get an incident by its id", response = IncidentDTO.class)
+    @ApiOperation(value = "Last 20 incidents desc", nickname = "getIncidentById", notes = "get an incident by its id", response = IncidentDTO.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Incident exists"),
             @ApiResponse(code = 400, message = "Incident not found")})

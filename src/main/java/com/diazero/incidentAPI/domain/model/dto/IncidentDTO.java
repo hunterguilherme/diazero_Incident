@@ -17,10 +17,10 @@ public class IncidentDTO {
     private String name;
     @ApiModelProperty(notes = "Incident description", example = "laptop softwares malfunction", required = true)
     private String description;
-    @ApiModelProperty(notes = "Creation date", example = "100", required = true)
+    @ApiModelProperty(notes = "Creation date", example = "2023-11-14T13:01:49.758676900-03:00", required = true)
     private OffsetDateTime createdAt;
-    @ApiModelProperty(notes = "Date of last modification", example = "6.9", required = true)
+    @ApiModelProperty(notes = "Date of last modification", example = "2023-11-16T13:01:49.758676900-03:00", required = true)
     private OffsetDateTime updatedAt;
-    @ApiModelProperty(notes = "", example = "2023-10-31", required = true)
+    @ApiModelProperty(notes = "Date of Incident closure", example = "2023-12-01T13:01:49.758676900-03:00")
     private OffsetDateTime closedAt;
 }
