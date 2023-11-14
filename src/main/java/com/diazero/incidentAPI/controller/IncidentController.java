@@ -34,18 +34,28 @@ public class IncidentController {
     @ApiOperation(value = "incident Update", nickname = "updateIncident", notes = "Updates an Incident", response = IncidentDTO.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Incident Updated Successfully"),
-            @ApiResponse(code = 400, message = "Incident not found")})
+            @ApiResponse(code = 400, message = "Incident not found, verify ID")})
     @RequestMapping(value = "{id}", consumes = { "application/json" }, produces = { "application/json" }, method = RequestMethod.PUT)
     public ResponseEntity<IncidentDTO> updateIncident(@PathVariable Long id, @RequestBody @Valid IncidentInputDTO incidentInputDTO) {
         IncidentDTO incident = incidentService.updateIncident(id, incidentInputDTO);
         return ResponseEntity.ok(incident);
     }
 
+    @ApiOperation(value = "Remove Documento", nickname = "removeDocumento", notes = "Remove apenas documento")
+    @ApiResponses(value = {
+            @ApiResponse(code = 204, message = "incident with id = x successfully deleted."),
+            @ApiResponse(code = 404, message = "Incident not found, verify ID")})
+    @RequestMapping(value = "{id}",produces = { "application/json" }, method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteIncident(@PathVariable Long id) {
+        incidentService.removeIncident(id);
+        return ResponseEntity.noContent().build();
+
+    }
 
     @ApiOperation(value = "incident by Id", nickname = "getIncidentById", notes = "get an incident by its id", response = IncidentDTO.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Incident exists"),
-            @ApiResponse(code = 400, message = "Incident not found")})
+            @ApiResponse(code = 400, message = "Incident not found, verify ID")})
     @RequestMapping(value = "{id}", consumes = { "application/json" }, produces = { "application/json" }, method = RequestMethod.GET)
     public ResponseEntity<IncidentDTO> getIncidentById(@PathVariable Long id) {
         IncidentDTO incident = incidentService.getIncidentById(id);

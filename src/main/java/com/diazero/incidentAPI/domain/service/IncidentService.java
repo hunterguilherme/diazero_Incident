@@ -9,7 +9,7 @@ public interface IncidentService {
 
     IncidentDTO createIncident(IncidentInputDTO incidentDTO);
     IncidentDTO updateIncident(Long id, IncidentInputDTO incidentDTO);
-    void removeIncident(IncidentDTO incidentDTO);
+    void removeIncident(Long id);
     List<IncidentDTO> getAllIncidents();
 
     IncidentDTO getIncidentById(Long id);

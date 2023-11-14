@@ -56,8 +56,9 @@ public class IncidentServiceImpl implements IncidentService {
     }
 
     @Override
-    public void removeIncident(IncidentDTO incidentDTO) {
-
+    public void removeIncident(Long id) {
+        Incident incident = searchOrFail(id);
+        incidentRepository.delete(incident);
     }
 
     @Override
