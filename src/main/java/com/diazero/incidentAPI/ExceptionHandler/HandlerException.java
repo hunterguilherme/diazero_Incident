@@ -15,7 +15,7 @@ public class HandlerException extends ResponseEntityExceptionHandler {
 
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<?> handleEntidadeNaoEncontradaExceptionn(EntityNotFoundException e) {
+    public ResponseEntity<?> handleEntityNotFoundExceptionn(EntityNotFoundException e) {
 
         ApiErrorMessage apiErrorMessage = new ApiErrorMessage(e.getMessage());
 
