@@ -8,6 +8,7 @@ import com.diazero.incidentAPI.domain.repository.IncidentRepository;
 import com.diazero.incidentAPI.domain.service.IncidentService;
 import com.diazero.incidentAPI.modelmapper.InputToEntityIncident;
 import com.diazero.incidentAPI.modelmapper.EntityToOutputIncident;
+import jdk.dynalink.linker.LinkerServices;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,6 @@ public class IncidentServiceImpl implements IncidentService {
     private InputToEntityIncident inputToEntityIncident;
 
     @Override
-    @Transactional
     public IncidentDTO createIncident(IncidentInputDTO incidentInputDTO) {
 
         Incident incident = inputToEntityIncident.toDomainObject(incidentInputDTO);
